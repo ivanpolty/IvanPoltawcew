@@ -29,6 +29,9 @@ namespace SistemaGestionEntities
         {
             this.id = id;
         }
+        public Usuario() { 
+        
+        }
 
         public int Id { get => id; set => id = value; }
         public string Nombre { get => nombre; set => nombre = value; }

@@ -33,5 +33,49 @@ namespace SistemaGestionBussines
         {
             return VentaData.ModificarVenta(id, venta);
         }
+
+        public static bool FinalizarVenta(int idUsuario, List<Producto> productos)
+        {
+            Venta venta = new Venta();
+            List<string> nombresDeProductos = productos.Select(p => p.Descripcion).ToList();
+            string comentarios ="";
+            venta.Comentarios = comentarios;
+            venta.IdUsuario = idUsuario;
+
+            VentaBussiness.addVenta(venta);
+            CaragarProductosRecibidos(productos, venta.Id);
+            DescontarStock(productos);
+             
+            
+
+
+
+            return true;
+
+        }
+        public  static void CaragarProductosRecibidos(List<Producto> producto, int idVenta)
+        {
+            producto.ForEach(p =>
+            {
+                ProductoVendido pvendido = new ProductoVendido();
+                pvendido.Stock = p.Stock;
+                pvendido.IdProducto = p.Id;
+                pvendido.IdVenta = idVenta;
+
+                ProductoVendidoBussiness.addProductoVendido(pvendido);
+
+            });
+        }
+
+        public static void DescontarStock(List<Producto> producto) {
+
+            producto.ForEach(p => {
+                Producto productoactual = ProductoBussiness.getProductoPorId(p.Id);
+                productoactual.Stock -= p.Stock;
+                ProductoBussiness.modifyProducto(p.Id,productoactual);
+            });
+        }
     }
+
+    
 }

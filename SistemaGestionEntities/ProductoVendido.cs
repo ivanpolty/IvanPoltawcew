@@ -25,6 +25,10 @@ namespace SistemaGestionEntities
         {
             this.id = id;
         }
+        public ProductoVendido()
+        {
+
+        }
 
         public int Id { get => id; set => id = value; }
         public int IdProducto { get => idProducto; set => idProducto = value; }

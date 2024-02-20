@@ -12,6 +12,10 @@ namespace SistemaGestionEntities
         private string comentarios { get; set; }
         private int idUsuario { get; set; }
 
+        public Venta()
+        {
+
+        }
         public Venta(string comentarios, int idusuario)
         {
 

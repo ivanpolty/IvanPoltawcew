@@ -20,7 +20,7 @@ namespace SistemaGestionBussines
             return ProductoVendidoData.ListarProductoVendido();
         }
 
-       public static bool addProductoVendido(ProductoVendido productovendido)
+        public static bool addProductoVendido(ProductoVendido productovendido)
         {
             return ProductoVendidoData.AgregarProductoVendido(productovendido);
         }
@@ -34,5 +34,7 @@ namespace SistemaGestionBussines
         {
             return ProductoVendidoData.ModificarProductoVendido(id, productoVendido);
         }
+
+       
     }
 }
