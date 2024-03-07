@@ -14,6 +14,24 @@ namespace SistemaGestionBussines
         {
             return ProductoVendidoData.ObtenerProductoVendido(id);
         }
+        public static List<ProductoVendido> getProductoVendidoPorIdusuario(int idusu) {
+            List<Producto> productos = ProductoData.ListarProducto();
+            List<Producto> productoFiltrado = productos.Where(p=> p.IdUsuario == idusu).ToList();
+
+            List <ProductoVendido> resultado = new List<ProductoVendido>();
+            List<ProductoVendido> productosVendidos = ProductoVendidoData.ListarProductoVendido();
+
+            foreach(Producto p in productoFiltrado)
+            {
+                int id = p.Id;
+                ProductoVendido? pvendido = productosVendidos.Find(pv => pv.IdProducto == id);
+                if(pvendido is not null)
+                {
+                    resultado.Add(pvendido);
+                }
+            }
+            return resultado;
+        }
 
         public static List<ProductoVendido> getProductosVendidos()
         {

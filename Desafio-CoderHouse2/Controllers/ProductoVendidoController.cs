@@ -9,11 +9,11 @@ namespace Desafio_CoderHouse2.Controllers
     [ApiController]
     public class ProductoVendidoController : ControllerBase
     {
-        [HttpGet(Name = "GetProductoVendido")]
+        [HttpGet("{idUsuario}")]
 
-        public IEnumerable<ProductoVendido> getProductoVendidos()
+        public IEnumerable<ProductoVendido> getProductoVendidos(int idUsuario)
         {
-            return ProductoVendidoBussiness.getProductosVendidos();
+            return ProductoVendidoBussiness.getProductoVendidoPorIdusuario(idUsuario);
         }
     }
 }

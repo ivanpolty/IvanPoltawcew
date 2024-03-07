@@ -33,6 +33,21 @@ namespace Desafio_CoderHouse2.Controllers
             }
 
         }
+        [HttpDelete (Name ="Eliminar Venta")]
+        public IActionResult EliminarVenta([FromBody] int id)
+        {
+            try
+            {
+                VentaBussiness.deleteVenta(id);
+                return base.Ok("Venta Eliminada");
+            }
+            catch (Exception)
+            {
+
+                return base.Conflict(new { mensaje = "Error al eliminar una venta", status = HttpStatusCode.Conflict });
+
+            }
+        }
 
 
     }

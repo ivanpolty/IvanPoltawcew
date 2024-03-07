@@ -11,35 +11,36 @@ namespace Desafio_CoderHouse2.Controllers
     [ApiController]
     public class ProductoController : ControllerBase
     {
-        [HttpGet(Name = "GetProducto")]
+        [HttpGet("{idUsuario}")]
 
-        public IEnumerable<Producto> getProductos()
+        public IEnumerable<Producto> getProductos(int idUsuario)
         {
-            return ProductoBussiness.getProducto();
+            return ProductoBussiness.ObtenerProductoPorIdUsu(idUsuario);
+
         }
 
         [HttpPost]
         public IActionResult AgregarProducto([FromBody] Producto p)
         {
-           if (ProductoBussiness.addProducto(p))
+            if (ProductoBussiness.addProducto(p))
             {
                 return base.Ok();
             }
             else
             {
-                return base.Conflict(new {mensaje = "No se agrego producto"});
+                return base.Conflict(new { mensaje = "No se agrego producto" });
             }
-                
+
         }
 
-        [HttpPut(Name = "Modificar Producto")]
+        [HttpPut]
         public IActionResult ModificarProducto(Producto p)
         {
             try
             {
 
-               ProductoBussiness.modifyProducto(p.Id,p);
-                return base.Created(nameof(ModificarProducto), new { mensaje = "Producto creado", status = HttpStatusCode.Created, p });
+                ProductoBussiness.modifyProducto(p.Id, p);
+                return base.Created(nameof(ModificarProducto), new { mensaje = "Producto modificado", status = HttpStatusCode.Created, p });
             }
             catch (Exception ex)
             {
@@ -47,12 +48,12 @@ namespace Desafio_CoderHouse2.Controllers
             }
         }
 
-        [HttpDelete (Name = "Eliminar Producto")]
-        public IActionResult EliminarProducto([FromBody] int id)
+        [HttpDelete("{idProducto}")]
+        public IActionResult EliminarProducto([FromBody] int idProducto)
         {
             try
             {
-                ProductoBussiness.deleteProducto(id);
+                ProductoBussiness.deleteProducto(idProducto);
                 return base.Ok("Producto Eliminado");
             }
             catch (Exception)

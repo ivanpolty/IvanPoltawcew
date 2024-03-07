@@ -21,6 +21,20 @@ namespace SistemaGestionBussines
             return ProductoData.ListarProducto();
         }
 
+        public static List<Producto> ObtenerProductoPorIdUsu(int id)
+        {
+            List<Producto> lista = ProductoData.ListarProducto();
+            List<Producto> listaproductosbuscados = new List<Producto>();
+            foreach (Producto producto in lista)
+            {
+                if (producto.IdUsuario == id)
+                {
+                    listaproductosbuscados.Add(producto);
+                }
+            }
+            return listaproductosbuscados;
+        }
+
         public static bool addProducto(Producto producto)
         {
             return ProductoData.AgregarProducto(producto);
